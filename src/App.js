@@ -3,43 +3,31 @@ import './App.css';
 import {useState} from "react";
 import "milligram";
 
+import Movie from "./model/Movie.js";
+import MovieForm from "./MovieForm";
+
 function App() {
     // Whole component is rendered
-    console.log("Component App is not regenerated");
+    console.log("Component App is regenerated");
 
-    let [title, setTitle] = useState('Artificial Intelligence: AI');
-    let errorMsg = '';
+    const [movies, setMovies] = useState([]);
+    console.log(movies)
 
-    if (title.length < 3) {
-        errorMsg = 'Title to short. Minimum length: 3';
-    } else if (title.length > 20) {
-        errorMsg = 'Title too long. Maximum length: 20';
-    }
+    // for now it's done inline
+    // function onMovieSubmit(newMovie) {
+    //     setMovies([...movies,newMovie]);
+    // }
 
-    const movies = [
-        {title: "Wall-E"},
-        {title: "Pulp Fiction"},
-        {title: "Matrix"},
-        {title: "1670"},
-    ];
-
-    function handleChange(event) {
-        console.log("Input changed");
-
-        setTitle(event.target.value);
-    };
     return (
         <div>
             <h1>My favourite movies to watch</h1>
             <h2>My favourite movie for today:</h2>
-            <h3>{title}</h3>
-            <input type="text" value={title} onChange={handleChange}/>
-            <button onClick={(mouseClick)=>alert(title)} >Show movie title</button>
-            {title.length > 0 && <div>{errorMsg}</div>}
+
+            <MovieForm onMovieSubmit={(movie) => setMovies([...movies, movie])}/>
 
             <div>
                 <ul>
-                    {movies.map((movie) => <li key={movie.title}>{movie.title}</li>)}
+                    {movies.map((movie) => <li key={movie.title}>{movie.title}, year: {movie.year}</li>)}
                 </ul>
             </div>
         </div>
