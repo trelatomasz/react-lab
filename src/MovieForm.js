@@ -18,7 +18,7 @@ export default function MovieForm(props) {
     }
 
     return <form onSubmit={addMovie}>
-        <h2>Add movie</h2>
+        <h2>Movie Form</h2>
         <div>
             <label>Title</label>
             <input type="text" value={title} onChange={(event) => setTitle(event.target.value)}/>
@@ -27,6 +27,6 @@ export default function MovieForm(props) {
             <label>Production year</label>
             <input type="text" value={year} onChange={(event) => setYear(event.target.value)}/>
         </div>
-        <button>Add a movie</button>
+        <button>{props.buttonName}</button>
     </form>;
 }

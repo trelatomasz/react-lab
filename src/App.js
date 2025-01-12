@@ -5,6 +5,7 @@ import "milligram";
 
 import Movie from "./model/Movie.js";
 import MovieForm from "./MovieForm";
+import MoviesList from "./MovieList"
 
 function App() {
     // Whole component is rendered
@@ -13,23 +14,26 @@ function App() {
     const [movies, setMovies] = useState([]);
     console.log(movies)
 
-    // for now it's done inline
-    // function onMovieSubmit(newMovie) {
-    //     setMovies([...movies,newMovie]);
-    // }
+    function searchForMovie(newMovie) {
+        const foundMovies = movies.filter(val => {
+            console.log("Check movie: ", val, newMovie);
+            return val.title == newMovie.title && val.year == newMovie.year;
+        });
+        console.log("Found movies: ", foundMovies)
+        if(foundMovies.length > 0){
+            alert("Movies found:" + foundMovies.length)
+        }
+        console.log("Looking for movie...");
+    }
 
     return (
         <div>
             <h1>My favourite movies to watch</h1>
             <h2>My favourite movie for today:</h2>
+            <MoviesList movies={movies} />
+            <MovieForm onMovieSubmit={(movie) => setMovies([...movies, movie])} buttonName="Add movie"/>
+            <MovieForm onMovieSubmit={searchForMovie} buttonName="Search for a movie"/>
 
-            <MovieForm onMovieSubmit={(movie) => setMovies([...movies, movie])}/>
-
-            <div>
-                <ul>
-                    {movies.map((movie) => <li key={movie.title}>{movie.title}, year: {movie.year}</li>)}
-                </ul>
-            </div>
         </div>
     );
 }
