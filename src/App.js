@@ -1,9 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import {useState} from "react";
 import "milligram";
-
-import Movie from "./model/Movie.js";
 import MovieForm from "./MovieForm";
 import MoviesList from "./MovieList"
 
